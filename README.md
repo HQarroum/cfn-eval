@@ -6,7 +6,7 @@
 # cfn-eval
 > A custom resource evaluating inline Node.js code directly inside your Cloudformation templates.
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](contributing.md)
+[![Build Status](https://www.travis-ci.com/HQarroum/cfn-eval.svg?token=yUo2UsFcyh65AXErgq4K&branch=master)](https://www.travis-ci.com/HQarroum/cfn-eval)
 
 Current version: **1.0.0**
 
