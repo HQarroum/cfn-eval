@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git-codecommit.us-west-2.amazonaws.com/v1/repos/cfn-eval"
+    "url": "git@github.com:HQarroum/cfn-eval.git"
   },
   "keywords": [
     "cloudformation",
