@@ -1,0 +1,20 @@
+jobs:
+  include:
+    - language: ruby
+      install:
+        - pip install cfn-lint --user --ignore-installed six
+        - gem install cfn-nag
+      script:
+        - cfn-lint -i W3002 -t cloudformation.yml
+        - cfn_nag_scan --input-path cloudformation.yml
+
+    - language: node_js
+      node_js:
+        - "12"
+        - "14"
+        - "16"
+      install:
+        - npm install --prefix lambda/ lambda/
+      script:
+        - npm run lint --prefix lambda/
+        - npm run test --prefix lambda/

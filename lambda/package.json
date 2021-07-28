@@ -1,0 +1,29 @@
+{
+  "name": "code-evaluator",
+  "version": "1.0.0",
+  "description": "A custom resource evaluating inline Node.js code directly inside your Cloudformation templates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-west-2.amazonaws.com/v1/repos/cfn-eval"
+  },
+  "keywords": [
+    "cloudformation",
+    "node.js"
+  ],
+  "author": "Halim Qarroum <hqm.post@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "joi": "^17.4.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6"
+  }
+}
