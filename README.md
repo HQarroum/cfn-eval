@@ -7,6 +7,7 @@
 > A custom resource evaluating inline Node.js code directly inside your Cloudformation templates.
 
 [![Build Status](https://www.travis-ci.com/HQarroum/cfn-eval.svg?token=yUo2UsFcyh65AXErgq4K&branch=master)](https://www.travis-ci.com/HQarroum/cfn-eval)
+[![CodeFactor](https://www.codefactor.io/repository/github/hqarroum/cfn-eval/badge)](https://www.codefactor.io/repository/github/hqarroum/cfn-eval)
 
 Current version: **1.0.0**
 
