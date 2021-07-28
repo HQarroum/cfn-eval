@@ -74,7 +74,7 @@ TransformResource:
     Code: |
       // The below statement creates a variable holding the string `afoovariablevalue`.
       return ({
-        FooLower: Foo.toLowerCase()
+        FooLower: props.Foo.toLowerCase()
       });
 ```
 
@@ -103,7 +103,7 @@ AsyncResource:
     Id: 42
     Code: |
       return (new Promise((resolve, reject) => {
-        setTimeout(() => resolve({ foo: `bar-${Id}` }), 1 * 1000);
+        setTimeout(() => resolve({ foo: `bar-${props.Id}` }), 1 * 1000);
       });
 ```
 
