@@ -1,0 +1,21 @@
+name: cfn-eval CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  test:
+    name: Testing cfn-eval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      
+      - name: Run cfn-nag
+        uses: stelligent/cfn-nag-sarif-action@v1
+        with:
+          input_path: templates

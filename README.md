@@ -16,7 +16,6 @@ Lead Maintainer: [Halim Qarroum](mailto:qarroumh@amazon.lu)
 ## 📋 Table of content
 
 - [Features](#-features)
-- [Metrics](#-metrics)
 - [Description](#-description)
 - [Usage](#-usage)
 - [Examples](#-examples)
@@ -27,18 +26,8 @@ Lead Maintainer: [Halim Qarroum](mailto:qarroumh@amazon.lu)
 - Evaluate Javascript code in your Cloudformation stacks using [Node VMs](https://nodejs.org/api/vm.html).
 - Improve your day-to-day Cloudformation workflows by using `cfn-eval` as a scripting mechanism for your stacks.
 - Seamlessly integrates with Cloudformation variables defined on your custom resource.
-- Works for both synchronous and asynchronous scripts you declare.
+- Works for both synchronous and asynchronous code.
 - Non-intrusive and can be seamlessly integrated into your own architecture.
-
-## 📊 Metrics
-
-The below metrics displays approximate values associated with deploying and using this stack.
-
-Metric | Value
------- | ------
-**Type** | Resource
-**Deployment Time** | 2 minutes
-**Audience** | Developers, Solutions Architect
 
 ## 🔰 Description
 
