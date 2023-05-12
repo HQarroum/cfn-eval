@@ -1,6 +1,6 @@
 {
   "name": "code-evaluator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A custom resource evaluating inline Node.js code directly inside your Cloudformation templates.",
   "main": "index.js",
   "scripts": {
