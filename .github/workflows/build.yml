@@ -8,9 +8,12 @@ on:
 
 jobs:
 
-  test:
+  build:
     name: Testing cfn-eval
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
     steps:
       - name: Clone repo
         uses: actions/checkout@v2
@@ -26,4 +29,15 @@ jobs:
 
       - name: Assess CloudFormation for Security Issues
         run: cfn_nag_scan --input-path cloudformation.yml
+      
+      - name: Install Lambda Function Dependencies
+        working-directory: ./lambda
+        run: npm install lambda/
 
+      - name: Lint Lambda Function
+        working-directory: ./lambda
+        run: npm run lint
+      
+      - name: Test Lambda Function
+        working-directory: ./lambda
+        run: npm run test
