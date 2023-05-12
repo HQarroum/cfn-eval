@@ -15,7 +15,6 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v2
       
-      - name: Run cfn-nag
-        uses: stelligent/cfn-nag-sarif-action@v1
-        with:
-          input_path: templates
+      - name: Install cfn-nag
+        run: gem install cfn-nag
+
