@@ -20,4 +20,10 @@ jobs:
 
       - name: Install cfn-nag
         run: sudo gem install cfn-nag
+      
+      - name: Lint CloudFormation
+        run: cfn-lint -i W3002 -t cloudformation.yml
+
+      - name: Assess CloudFormation for Security Issues
+        run: cfn_nag_scan --input-path cloudformation.yml
 
