@@ -32,7 +32,7 @@ jobs:
       
       - name: Install Lambda Function Dependencies
         working-directory: ./lambda
-        run: npm install lambda/
+        run: npm install
 
       - name: Lint Lambda Function
         working-directory: ./lambda
