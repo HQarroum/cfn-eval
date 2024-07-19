@@ -1,6 +1,5 @@
-const Joi      = require('joi');
-const vm       = require('./vm');
-const request  = require('request-promise');
+const vm      = require('./vm');
+const request = require('request-promise');
 
 /**
  * Cloudformation result codes.
@@ -9,17 +8,6 @@ const Result = {
   SUCCESS: 'SUCCESS',
   FAILURE: 'FAILED'
 };
-
-/**
- * The schema of a Cloudformation request event.
- */
-const schema = Joi.object().keys({
-  RequestType: Joi.string().valid('Create', 'Update', 'Delete').required(),
-  LogicalResourceId: Joi.string().required(),
-  ResourceProperties: Joi.object().keys({
-    Code: Joi.string().required()
-  }).unknown().required()
-}).unknown().required();
 
 /**
  * @return a constructed and valid body response for Cloudformation.
@@ -64,16 +52,9 @@ const sendResponse = function (event) {
 /**
  * Lambda function entry point.
  * @param {*} event the lambda function input `event`.
- * @param {*} event the lambda function `context` object.
+ * @param {*} context the lambda function `context` object.
  */
 exports.handler = async (event, context) => {
-  const result = schema.validate(event);
-
-  // Validating the `event` object and its attributes.
-  if (result.error) {
-    return (sendResponse(event, context, Result.FAILED, { error: result.error }));
-  }
-
   try {
     if (event.RequestType === 'Create' || event.RequestType === 'Update') {
       // Retrieving parameters declared on the custom resource.

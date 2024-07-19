@@ -29,7 +29,7 @@ Resources:
       Handler: index.handler
       Role: !GetAtt EvaluationRole.Arn
       Code: ./lambda/
-      Runtime: nodejs14.x
+      Runtime: nodejs20.x
       Timeout: !Ref Timeout
       MemorySize: !Ref MemorySize
       Environment:
