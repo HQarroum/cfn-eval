@@ -1,7 +1,8 @@
-<br />
+<br /><br />
 <p align="center">
-  <img width="320" src="assets/icon.png" />
+  <img width="600" src="assets/icon.png" />
 </p>
+<br />
 
 # cfn-eval
 > A custom resource evaluating inline Node.js code directly inside your Cloudformation templates.
@@ -24,16 +25,16 @@ Lead Maintainer: [Halim Qarroum](mailto:qarroumh@amazon.lu)
 ## 🔖 Features
 
 - Evaluate Javascript code in your Cloudformation stacks using [Node VMs](https://nodejs.org/api/vm.html).
-- Improve your day-to-day Cloudformation workflows by using `cfn-eval` as a scripting mechanism for your stacks.
+- Improve your day-to-day Cloudformation workflows by using `cfn-eval` as a scripting mechanism for stacks.
 - Seamlessly integrates with Cloudformation variables defined on your custom resource.
 - Works for both synchronous and asynchronous code.
 - Non-intrusive and can be seamlessly integrated into your own architecture.
 
 ## 🔰 Description
 
-This stack exposes a Cloudformation custom resource allowing developers of Cloudformation templates to augment and automate their Cloudformation resources and workflows using simple Javascript code declared inline in their stack and evaluated in a Lambda function as a resource. The custom resource takes standard Cloudformation parameters as an input, evaluates your code, and outputs results which you can then refer to in your Cloudformation template.
+This stack exposes a [Cloudformation custom resource](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html) allowing developers of Cloudformation templates to augment and automate their Cloudformation resources and workflows using simple Javascript code declared inline in their stack and evaluated in a Lambda function as a resource at runtime. The custom resource takes standard Cloudformation parameters as an input, evaluates your code, and outputs results which can be referenced in Cloudformation templates.
 
-This can be particularly handy to script custom behaviors directly in a Cloudformation template when a native intrinsic function is not sufficient for a particular task (for instance, you might want to generate random numbers to create unique identifiers for your resources, perform string transformations, etc.).
+This can be particularly handy to script custom behaviors directly in a Cloudformation template when a native intrinsic function is not sufficient for a particular task (e.g generate random numbers to create unique identifiers for your resources, perform string transformations, etc.).
 
 ## 🛠 Usage
 
@@ -47,11 +48,11 @@ EvaluationResourceStack:
     TemplateURL: ./cloudformation.yml
 ```
 
-This will allow you to import the Lambda function associated with the custom resource we create behind the scene, as well as its associated role.
+This allows to import the Lambda function associated with the custom resource we create behind the scene, as well as its associated role.
 
 ### Inline evaluation example
 
-Below is an example of inline evaluation of Javascript code within your template. This example demonstrates how to manipulate the input (i.e parameters) given to your resource, and generate a dynamic output you can reference in your template.
+Below is an example of inline evaluation of Javascript code within a template. This example demonstrates how to manipulate the input (i.e parameters) given to your resource, and generate a dynamic output you can reference in your template.
 
 ```yaml
 # Definition of a transform resource.
@@ -59,17 +60,18 @@ TransformResource:
   Type: Custom::TransformResource
   Properties:
     ServiceToken: !Sub ${EvaluationResourceStack.Outputs.EvaluationResourceFunctionArn}
-    Foo: AFooVariableValue
+    Foo: SomeValue
     Code: |
-      // The below statement creates a variable holding the string `afoovariablevalue`.
+      // The below statement creates a variable
+      // holding the string `somevalue`.
       return ({
         FooLower: props.Foo.toLowerCase()
       });
 ```
 
-Here, `Foo` is a parameter you declare on your custom resource which is directly referenceable into your inline Javascript code. This provides a handy way in which you can repeatedly write custom scripts to further customize how your template should behave.
+Here, `Foo` is a parameter you declare on the custom resource which is directly referenceable into your inline Javascript code. This provides a handy way in which you can repeatedly write custom scripts to further customize how your template should behave.
 
-The above code variables are referenceable in the outputs of your custom resource. Below is an example of how to reference a produced variable in your stack.
+The above code variables are referenceable in the outputs of your custom resource. Below is an example of how to reference a produced variable in a stack.
 
 ```yaml
 Outputs:
@@ -77,11 +79,11 @@ Outputs:
     Value: !GetAtt TransformResource.FooLower
 ```
 
-> Note that only variables returned by your code will be made available to your Cloudformation template. You must return an object from your code with attributes to make them available in the outputs of the custom resource.
+> Note that only variables returned by your code will be made available to your Cloudformation template. You must return an object from your code with the attributes to make available in the outputs of the custom resource.
 
 ### Asynchronous code
 
-We've seen above an example of a synchronous Javascript script which be embedded inline into our template. It is also possible to use asynchronous code and get its output in an inline Javascript script. To do so, you need to return a `Promise` which will resolve an object which will be exported by your custom resource.
+It is also possible to use asynchronous code and reference its output in an inline Javascript script. To do so, you need to return a `Promise` which will resolve the object exported by your custom resource.
 
 ```yaml
 # Definition of an async resource.
@@ -96,7 +98,7 @@ AsyncResource:
       });
 ```
 
-In the above example, a new `Promise` is created and generates a result object after 1 second. The resulting object's variables resolved by the script are made available through the custom resources outputs as shown below.
+In the above example, a new `Promise` is created and resolves a value object after 1 second. The resulting object's variables resolved by the script are made available through the custom resources outputs as shown below.
 
 ```yaml
 Outputs:
